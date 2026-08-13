@@ -1,0 +1,330 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Originals - Galeria dos Originais</title>
+
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Georgia', 'Times New Roman', serif;
+        }
+
+        body {
+            background: #0a0a0a;
+            background-image: 
+                radial-gradient(ellipse at center, #1a0a0a 0%, #0a0a0a 70%),
+                url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48cGF0aCBkPSJNMjAgMjBhMTAgMTAgMCAwIDEgMC0yMCAxMCAxMCAwIDAgMSAwIDIweiIgZmlsbD0iIzFhMWEyYSIgb3BhY2l0eT0iMC4xIi8+PC9zdmc+');
+            color: #c9b8a8;
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            padding: 50px 20px 30px;
+            background: linear-gradient(180deg, #1a0a0a 0%, #0a0a0a 100%);
+            border-bottom: 2px solid #8b0000;
+            position: relative;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #8b0000, transparent);
+        }
+
+        header h1 {
+            color: #8b0000;
+            font-size: 3.5rem;
+            font-weight: normal;
+            text-shadow: 0 0 30px rgba(139, 0, 0, 0.3);
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        header h1 span {
+            color: #c9b8a8;
+            font-size: 1.8rem;
+            letter-spacing: 4px;
+        }
+
+        header p {
+            color: #6b5a4a;
+            font-style: italic;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+        }
+
+        .gallery-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 35px;
+            padding: 50px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: linear-gradient(145deg, #1a1210, #0d0a0a);
+            border: 1px solid #2a1a1a;
+            border-radius: 8px;
+            box-shadow: 
+                0 0 20px rgba(139, 0, 0, 0.1),
+                inset 0 0 30px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            width: 300px;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, transparent 60%, rgba(139, 0, 0, 0.1));
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: #8b0000;
+            box-shadow: 
+                0 10px 40px rgba(139, 0, 0, 0.2),
+                inset 0 0 30px rgba(139, 0, 0, 0.05);
+        }
+
+        .card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            filter: grayscale(40%) sepia(20%);
+            transition: filter 0.4s ease;
+            position: relative;
+            z-index: 0;
+        }
+
+        .card:hover img {
+            filter: grayscale(20%) sepia(10%);
+        }
+
+        .card-content {
+            padding: 22px 25px 25px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-content h3 {
+            color: #8b0000;
+            font-size: 1.3rem;
+            font-weight: normal;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #2a1a1a;
+            padding-bottom: 10px;
+        }
+
+        .card-content h3::before {
+            content: '⚜️ ';
+            font-size: 0.9rem;
+        }
+
+        .card-content p {
+            font-size: 0.95rem;
+            color: #8a7a6a;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .like-btn {
+            background: transparent;
+            color: #6b5a4a;
+            border: 1px solid #2a1a1a;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Georgia', serif;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .like-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(139, 0, 0, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .like-btn:hover::before {
+            left: 100%;
+        }
+
+        .like-btn:hover {
+            border-color: #8b0000;
+            color: #c9b8a8;
+            background: rgba(139, 0, 0, 0.1);
+        }
+
+        .like-btn.liked {
+            border-color: #8b0000;
+            color: #8b0000;
+            background: rgba(139, 0, 0, 0.15);
+            box-shadow: 0 0 20px rgba(139, 0, 0, 0.1);
+        }
+
+        .like-btn .like-count {
+            color: #8b0000;
+            font-weight: bold;
+        }
+
+        .like-btn.liked .like-count {
+            color: #ff3333;
+        }
+
+        /* Símbolo dos Originais no canto */
+        .originals-symbol {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            color: #1a0a0a;
+            font-size: 3rem;
+            opacity: 0.1;
+            pointer-events: none;
+            font-family: serif;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2rem;
+                letter-spacing: 4px;
+            }
+            
+            header h1 span {
+                font-size: 1.2rem;
+            }
+            
+            .card {
+                width: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>THE <span>ORIGINALS</span></h1>
+        <p>— A Primeira Família Vampírica —</p>
+    </header>
+
+    <main class="gallery-container">
+
+        <div class="card">
+            <img src="https://picsum.photos/id/1024/300/220" alt="Klaus Mikaelson">
+            <div class="card-content">
+                <h3>Klaus Mikaelson</h3>
+                <p>"O híbrido original. Sempre fui o lobo solitário, mas minha família sempre será minha maior força e fraqueza."</p>
+                <button class="like-btn">🩸 <span class="like-count">0</span> Sangue</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://picsum.photos/id/1039/300/220" alt="Elijah Mikaelson">
+            <div class="card-content">
+                <h3>Elijah Mikaelson</h3>
+                <p>"O nobre original. Minha palavra é minha honra, e minha família é minha redenção."</p>
+                <button class="like-btn">🩸 <span class="like-count">0</span> Sangue</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://picsum.photos/id/1040/300/220" alt="Rebekah Mikaelson">
+            <div class="card-content">
+                <h3>Rebekah Mikaelson</h3>
+                <p>"A irmã original. Sempre desejei ser humana, mas o amor pela minha família me mantém imortal."</p>
+                <button class="like-btn">🩸 <span class="like-count">0</span> Sangue</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://picsum.photos/id/1041/300/220" alt="Cole Mikaelson">
+            <div class="card-content">
+                <h3>Cole Mikaelson</h3>
+                <p>"O feiticeiro original. A magia corre em minhas veias, mas a lealdade corre mais forte."</p>
+                <button class="like-btn">🩸 <span class="like-count">0</span> Sangue</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://picsum.photos/id/1042/300/220" alt="Freya Mikaelson">
+            <div class="card-content">
+                <h3>Freya Mikaelson</h3>
+                <p>"A primogênita original. Passei séculos em busca da minha família, e agora nada nos separará."</p>
+                <button class="like-btn">🩸 <span class="like-count">0</span> Sangue</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://picsum.photos/id/1044/300/220" alt="Marcel Gerard">
+            <div class="card-content">
+                <h3>Marcel Gerard</h3>
+                <p>"O rei de Nova Orleans. Filho adotivo dos Originais, sempre lutando pelo que é meu."</p>
+                <button class="like-btn">🩸 <span class="like-count">0</span> Sangue</button>
+            </div>
+        </div>
+
+    </main>
+
+    <div class="originals-symbol">⚜️</div>
+
+    <script>
+        // Seleciona todos os botões de "sangue" (curtidas)
+        const botoesSangue = document.querySelectorAll('.like-btn');
+
+        botoesSangue.forEach(function(botao) {
+           
+            botao.addEventListener('click', function() {
+               
+                const spanContador = botao.querySelector('.like-count');
+                let sangueAtual = parseInt(spanContador.textContent);
+               
+                if (botao.classList.contains('liked')) {
+                    botao.classList.remove('liked');
+                    sangueAtual--;
+                } else {
+                    botao.classList.add('liked');
+                    sangueAtual++;
+                }
+               
+                spanContador.textContent = sangueAtual;
+            });
+           
+        });
+    </script>
+</body>
+</html>
