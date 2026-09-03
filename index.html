@@ -1,289 +1,409 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Vampire Diaries - Galeria Mística</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Outer Banks · Elenco</title>
+  <!-- Fonte com vibe jovem/aventura -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    <style>
-        /* Reset básico para limpar margens do navegador */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+    body {
+      background: #0b1a1e; /* fundo escuro com tom de água profunda */
+      background-image: radial-gradient(circle at 20% 30%, #1d3e44 0%, #071013 90%);
+      font-family: 'Roboto', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1.5rem;
+    }
 
-        body {
-            background-color: #0a0a0a;
-            color: #d4c9b8;
-            background-image: radial-gradient(circle at 20% 30%, #1a0f0a 0%, #0a0503 100%);
-            min-height: 100vh;
-        }
+    /* título com estilo "OBX" */
+    .header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
 
-        header {
-            text-align: center;
-            padding: 40px 20px 30px;
-            background: linear-gradient(180deg, #1a0d08 0%, #0a0503 100%);
-            border-bottom: 2px solid #6b2f1a;
-            position: relative;
-        }
+    .header h1 {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 4.2rem;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: #d9b382;
+      text-shadow: 0 4px 0 #5f3d2b, 0 8px 12px rgba(0,0,0,0.7);
+      background: linear-gradient(180deg, #f5d7b3, #b8865b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+    }
 
-        header h1 {
-            color: #c9a87c;
-            font-size: 2.5rem;
-            text-shadow: 0 0 20px rgba(150, 60, 30, 0.5);
-            letter-spacing: 4px;
-            margin-bottom: 8px;
-            font-weight: 300;
-        }
+    .header h1::after {
+      content: "⚓";
+      font-size: 2.8rem;
+      background: none;
+      -webkit-text-fill-color: initial;
+      color: #c9a87e;
+      margin-left: 12px;
+      text-shadow: 0 0 8px #b48b5a;
+    }
 
-        header p {
-            color: #8a7a6a;
-            font-style: italic;
-            letter-spacing: 2px;
-        }
+    .header p {
+      color: #b8c9c5;
+      font-weight: 300;
+      letter-spacing: 3px;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      border-top: 2px solid #7f9b8e;
+      display: inline-block;
+      padding-top: 8px;
+      margin-top: 4px;
+      background: rgba(10, 25, 28, 0.5);
+      padding: 0.2rem 2rem;
+      backdrop-filter: blur(2px);
+      border-radius: 30px;
+    }
 
-        header::after {
-            content: "⚜️";
-            position: absolute;
-            bottom: -14px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 24px;
-            background: #0a0503;
-            padding: 0 12px;
-        }
+    /* grade de personagens */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 2rem 1.8rem;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+    }
 
-        /* --- CONCEITO: Flexbox e Classes --- */
-        .gallery-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-            padding: 50px 20px;
-            max-width: 1300px;
-            margin: 0 auto;
-        }
+    /* card individual */
+    .card {
+      background: #1f2f30;
+      background: linear-gradient(145deg, #1e3133, #142123);
+      border-radius: 28px 28px 18px 18px;
+      padding: 1.2rem 0.6rem 0.8rem;
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.7), 0 0 0 1px #3a5a57 inset;
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      backdrop-filter: blur(4px);
+      border-bottom: 4px solid #bb8b64;
+    }
 
-        /* Estilo do Card Individual - Estilo Sombrio/Vampírico */
-        .card {
-            background: linear-gradient(145deg, #1e130f, #120b08);
-            border-radius: 16px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8), 0 0 30px rgba(100, 40, 20, 0.15);
-            overflow: hidden;
-            width: 300px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid #3d2419;
-            position: relative;
-        }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 28px rgba(0, 0, 0, 0.8), 0 0 0 2px #c7a074 inset;
+      border-bottom-color: #e6b684;
+    }
 
-        .card:hover {
-            transform: translateY(-8px) scale(1.01);
-            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.9), 0 0 50px rgba(150, 60, 30, 0.2);
-            border-color: #7a3f2a;
-        }
+    /* imagem estilizada com ícone / avatar */
+    .avatar {
+      width: 100px;
+      height: 100px;
+      background: #2f4a47;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.8rem;
+      font-weight: 400;
+      margin-bottom: 0.8rem;
+      box-shadow: 0 4px 0 #4f3f2b, 0 8px 12px rgba(0,0,0,0.5);
+      border: 2px solid #b48b5a;
+      transition: 0.2s;
+      background: radial-gradient(circle at 30% 30%, #3f605a, #1b2d2a);
+      color: #f2dec4;
+    }
 
-        /* --- CONCEITO: Imagens e Espaçamentos --- */
-        .card img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            border-bottom: 2px solid #2d1a12;
-            filter: saturate(0.85) contrast(1.05);
-        }
+    .card:hover .avatar {
+      border-color: #eac296;
+      background: radial-gradient(circle at 30% 30%, #54756e, #1f3530);
+      transform: scale(1.02);
+    }
 
-        .card-content {
-            padding: 20px 22px 24px;
-        }
+    /* nome do personagem */
+    .nome {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: #f2e2cf;
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 2px #0a1414;
+      line-height: 1.2;
+      margin-top: 4px;
+      border-bottom: 1px dashed #6d8a7a;
+      padding-bottom: 5px;
+      width: 90%;
+    }
 
-        .card-content h3 {
-            color: #c9a87c;
-            font-size: 1.3rem;
-            margin-bottom: 6px;
-            letter-spacing: 1px;
-            font-weight: 400;
-        }
+    /* apelido / grupo */
+    .grupo {
+      font-size: 0.65rem;
+      font-weight: 400;
+      color: #cbb296;
+      background: #1c302b;
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+      margin: 4px 0 2px;
+      letter-spacing: 1px;
+      border: 1px solid #6d7f72;
+      text-transform: uppercase;
+    }
 
-        .card-content .subtitle {
-            color: #8a6d5a;
-            font-size: 0.85rem;
-            font-style: italic;
-            margin-bottom: 12px;
-            letter-spacing: 1px;
-        }
+    /* destaque para John B e sua comb */
+    .card.johnb {
+      background: linear-gradient(145deg, #1f3a33, #12221e);
+      border-bottom: 6px solid #e3b17b;
+      box-shadow: 0 0 0 2px #b49264, 0 12px 24px rgba(0, 0, 0, 0.8);
+    }
 
-        .card-content p {
-            font-size: 14px;
-            color: #b3a392;
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }
+    .card.johnb .avatar {
+      background: radial-gradient(circle at 30% 30%, #6b8c7a, #233d33);
+      border: 3px solid #eabe84;
+      box-shadow: 0 0 0 2px #291f14, 0 6px 0 #71563a;
+    }
 
-        /* Estilo do Botão de Curtida - Temática Vampírica */
-        .like-btn {
-            background: #2d1a12;
-            color: #d4c9b8;
-            border: 1px solid #5a3120;
-            padding: 10px 18px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-            letter-spacing: 0.5px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
+    .card.johnb .nome {
+      color: #fae1b6;
+      text-shadow: 0 0 6px #b37d46;
+    }
 
-        .like-btn:hover {
-            background: #3d2419;
-            border-color: #8a4d30;
-            box-shadow: 0 0 20px rgba(150, 60, 30, 0.2);
-        }
+    .card.johnb .grupo {
+      background: #3f2f1e;
+      color: #efdabc;
+      border-color: #bb8b5a;
+    }
 
-        /* Classe dinâmica que o JS adiciona - "Mordida" Vampírica */
-        .like-btn.liked {
-            background: #4a1a0e;
-            border-color: #b54a2a;
-            color: #f0d5b0;
-            box-shadow: 0 0 30px rgba(180, 60, 30, 0.3);
-        }
+    /* comb John B (boné + camisa + mochila) */
+    .comb {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px 10px;
+      margin: 6px 0 2px;
+      font-size: 0.9rem;
+      background: #0f1f1b;
+      padding: 5px 12px;
+      border-radius: 40px;
+      border: 1px solid #7d9a7a;
+      color: #dac9b0;
+      font-weight: 400;
+      letter-spacing: 0.3px;
+      backdrop-filter: blur(2px);
+    }
 
-        .like-btn.liked::before {
-            content: "🩸 ";
-        }
+    .comb span {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
 
-        .like-btn .like-count {
-            font-weight: 700;
-            color: #d4a87a;
-            min-width: 20px;
-            display: inline-block;
-            text-align: center;
-        }
+    .comb i {
+      font-style: normal;
+      font-size: 1.1rem;
+    }
 
-        /* Selo de linhagem */
-        .card::after {
-            content: "⚜️";
-            position: absolute;
-            top: 12px;
-            right: 16px;
-            font-size: 18px;
-            opacity: 0.3;
-            color: #8a5a3a;
-        }
+    /* ícones pequenos para a comb */
+    .badge-icon {
+      background: #1f2f28;
+      border-radius: 30px;
+      padding: 2px 10px 2px 6px;
+      border-left: 2px solid #cc9f6b;
+    }
 
-        footer {
-            text-align: center;
-            padding: 30px 20px;
-            color: #4d3d32;
-            font-size: 0.9rem;
-            border-top: 1px solid #1f120c;
-            letter-spacing: 1px;
-            background: #0a0503;
-        }
+    /* cores adicionais */
+    .footer {
+      margin-top: 3.5rem;
+      font-size: 0.8rem;
+      color: #5d7970;
+      letter-spacing: 2px;
+      border-top: 1px solid #2e4942;
+      padding-top: 1.8rem;
+      width: 80%;
+      text-align: center;
+      font-weight: 300;
+    }
 
-        footer span {
-            color: #7a4d32;
-        }
-    </style>
+    .footer strong {
+      color: #b8976b;
+      font-weight: 400;
+    }
+
+    /* adaptação mobile */
+    @media (max-width: 600px) {
+      .header h1 { font-size: 2.8rem; }
+      .grid { gap: 1.2rem; }
+      .avatar { width: 80px; height: 80px; font-size: 2.2rem; }
+      .nome { font-size: 1rem; }
+    }
+  </style>
 </head>
 <body>
+  <div class="header">
+    <h1>Outer Banks</h1>
+    <p>⚡ Os Pogue &amp; Kooks ⚡</p>
+  </div>
 
-    <header>
-        <h1>🦇 Legado dos Originais</h1>
-        <p>Os imortais mais poderosos de Nova Orleans — e além</p>
-    </header>
+  <div class="grid">
+    <!-- 1 - John B (com combinação especial) -->
+    <div class="card johnb">
+      <div class="avatar">🧢</div>
+      <div class="nome">John B</div>
+      <div class="grupo">⚓ Pogue</div>
+      <!-- COMB John B: boné + camisa + mochila -->
+      <div class="comb">
+        <span class="badge-icon"><i>🧢</i> Boné</span>
+        <span class="badge-icon"><i>👕</i> Camisa</span>
+        <span class="badge-icon"><i>🎒</i> Mochila</span>
+      </div>
+    </div>
 
-    <main class="gallery-container">
+    <!-- 2 -->
+    <div class="card">
+      <div class="avatar">👩🏻</div>
+      <div class="nome">Sarah</div>
+      <div class="grupo">🌊 Kook</div>
+    </div>
 
-        <!-- KLAUS MIKAELSON -->
-        <div class="card">
-            <img src="https://i.pinimg.com/564x/6b/2f/ba/6b2fbaec2f7644a6f5b9b2352b3d2c28.jpg" alt="Klaus Mikaelson">
-            <div class="card-content">
-                <h3>Klaus Mikaelson</h3>
-                <div class="subtitle">⚜️ Híbrido Original</div>
-                <p>"Sou o híbrido original. A criatura mais poderosa do mundo." — O Rei de Nova Orleans.</p>
-                <button class="like-btn">❤️ <span class="like-count">0</span> Curtidas</button>
-            </div>
-        </div>
+    <!-- 3 -->
+    <div class="card">
+      <div class="avatar">🧔🏻</div>
+      <div class="nome">Pope</div>
+      <div class="grupo">📚 Pogue</div>
+    </div>
 
-        <!-- ELIJAH MIKAELSON -->
-        <div class="card">
-            <img src="https://i.pinimg.com/564x/37/43/4a/37434a390b2b04e8003f2df60b288a43.jpg" alt="Elijah Mikaelson">
-            <div class="card-content">
-                <h3>Elijah Mikaelson</h3>
-                <div class="subtitle">⚜️ Original Cavalheiro</div>
-                <p>"Sempre fui o irmão que manteve a palavra." — O mais honrado dos Mikaelson.</p>
-                <button class="like-btn">❤️ <span class="like-count">0</span> Curtidas</button>
-            </div>
-        </div>
+    <!-- 4 -->
+    <div class="card">
+      <div class="avatar">👨🏽</div>
+      <div class="nome">JJ</div>
+      <div class="grupo">🏄 Pogue</div>
+    </div>
 
-        <!-- DAVINA CLAIRE -->
-        <div class="card">
-            <img src="https://i.pinimg.com/564x/cf/7c/f4/cf7cf43cbccc48dfe0a79baa4b14f41e.jpg" alt="Davina Claire">
-            <div class="card-content">
-                <h3>Davina Claire</h3>
-                <div class="subtitle">🔮 Bruxa Regente</div>
-                <p>"Ninguém me subestima duas vezes." — A feiticeira que desafiou os Originais.</p>
-                <button class="like-btn">❤️ <span class="like-count">0</span> Curtidas</button>
-            </div>
-        </div>
+    <!-- 5 -->
+    <div class="card">
+      <div class="avatar">👩🏼</div>
+      <div class="nome">Kiara</div>
+      <div class="grupo">🌺 Pogue</div>
+    </div>
 
-        <!-- KOL MIKAELSON -->
-        <div class="card">
-            <img src="https://i.pinimg.com/564x/81/ba/d5/81bad5ad3de12634d9d23fd07851a524.jpg" alt="Kol Mikaelson">
-            <div class="card-content">
-                <h3>Kol Mikaelson</h3>
-                <div class="subtitle">⚜️ Original Traiçoeiro</div>
-                <p>"Os imortais também sabem se divertir." — O mais imprevisível da família.</p>
-                <button class="like-btn">❤️ <span class="like-count">0</span> Curtidas</button>
-            </div>
-        </div>
+    <!-- 6 -->
+    <div class="card">
+      <div class="avatar">🧔🏼</div>
+      <div class="nome">Rafe</div>
+      <div class="grupo">💎 Kook</div>
+    </div>
 
-        <!-- HAYLEY MARSHALL -->
-        <div class="card">
-            <img src="https://i.pinimg.com/564x/f9/09/c9/f909c922a5206e8a76f247689acb6d9d.jpg" alt="Hayley Marshall">
-            <div class="card-content">
-                <h3>Hayley Marshall</h3>
-                <div class="subtitle">🐺 Híbrida Alfa</div>
-                <p>"Uma mãe loba fará qualquer coisa por sua filha." — A força da linhagem.</p>
-                <button class="like-btn">❤️ <span class="like-count">0</span> Curtidas</button>
-            </div>
-        </div>
+    <!-- 7 -->
+    <div class="card">
+      <div class="avatar">👩🏽</div>
+      <div class="nome">Wheezie</div>
+      <div class="grupo">🐚 Kook</div>
+    </div>
 
-    </main>
+    <!-- 8 -->
+    <div class="card">
+      <div class="avatar">👨🏻</div>
+      <div class="nome">Topper</div>
+      <div class="grupo">⛵ Kook</div>
+    </div>
 
-    <footer>
-        <span>🩸</span> Todos os direitos reservados aos Mikaelson • Galeria Mística <span>🩸</span>
-    </footer>
+    <!-- 9 -->
+    <div class="card">
+      <div class="avatar">👩🏻</div>
+      <div class="nome">Rose</div>
+      <div class="grupo">🏝️ Kook</div>
+    </div>
 
-    <script>
-        // Seleciona TODOS os botões de curtida
-        const botoesLike = document.querySelectorAll('.like-btn');
+    <!-- 10 -->
+    <div class="card">
+      <div class="avatar">🧔🏻</div>
+      <div class="nome">Ward</div>
+      <div class="grupo">🏦 Kook</div>
+    </div>
 
-        // Passa por cada botão usando o forEach
-        botoesLike.forEach(function(botao) {
-           
-            botao.addEventListener('click', function() {
-               
-                const spanContador = botao.querySelector('.like-count');
-                let curtidasAtuais = parseInt(spanContador.textContent);
-               
-                // Lógica de curtidas com estilo vampírico
-                if (botao.classList.contains('liked')) {
-                    botao.classList.remove('liked');
-                    curtidasAtuais--;
-                } else {
-                    botao.classList.add('liked');
-                    curtidasAtuais++;
-                }
-               
-                spanContador.textContent = curtidasAtuais;
-            });
-           
-        });
-    </script>
+    <!-- 11 -->
+    <div class="card">
+      <div class="avatar">👨🏾</div>
+      <div class="nome">Big John</div>
+      <div class="grupo">🧭 Pogue</div>
+    </div>
+
+    <!-- 12 -->
+    <div class="card">
+      <div class="avatar">👩🏼</div>
+      <div class="nome">Anna</div>
+      <div class="grupo">🌿 Pogue</div>
+    </div>
+
+    <!-- 13 -->
+    <div class="card">
+      <div class="avatar">👨🏻</div>
+      <div class="nome">Barry</div>
+      <div class="grupo">🔫 Kook</div>
+    </div>
+
+    <!-- 14 -->
+    <div class="card">
+      <div class="avatar">🧔🏽</div>
+      <div class="nome">Gavin</div>
+      <div class="grupo">🚤 Pogue</div>
+    </div>
+
+    <!-- 15 -->
+    <div class="card">
+      <div class="avatar">👩🏾</div>
+      <div class="nome">Cleo</div>
+      <div class="grupo">🏴‍☠️ Pogue</div>
+    </div>
+
+    <!-- 16 -->
+    <div class="card">
+      <div class="avatar">🧔🏻</div>
+      <div class="nome">Tanny</div>
+      <div class="grupo">⚜️ Kook</div>
+    </div>
+
+    <!-- 17 -->
+    <div class="card">
+      <div class="avatar">👨🏼</div>
+      <div class="nome">Mike</div>
+      <div class="grupo">🔧 Pogue</div>
+    </div>
+
+    <!-- 18 -->
+    <div class="card">
+      <div class="avatar">🧑🏽</div>
+      <div class="nome">Kelce</div>
+      <div class="grupo">🏈 Kook</div>
+    </div>
+
+    <!-- 19 -->
+    <div class="card">
+      <div class="avatar">👩🏻</div>
+      <div class="nome">Ruthie</div>
+      <div class="grupo">🍹 Kook</div>
+    </div>
+
+    <!-- 20 -->
+    <div class="card">
+      <div class="avatar">🧔🏼</div>
+      <div class="nome">Shoupe</div>
+      <div class="grupo">👮‍♂️ Kook</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <strong>⚓ Outer Banks · 20 personagens</strong> &nbsp;|&nbsp; John B · comb: 🧢 boné + 👕 camisa + 🎒 mochila
+  </div>
 </body>
 </html>
